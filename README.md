@@ -18,6 +18,14 @@ A text classification project exploring spam detection using email data and TF-I
 Clone the repository, create a Python environment, install Jupyter and the dependencies imported in the notebook, and open main.ipynb. The package metadata does not currently declare runtime dependencies. Run the notebook to inspect training and evaluation.
 
 ## Limitations
-No independently verified test metrics are provided here. Evaluate precision, recall, F1 and false positives before deployment. Only load pickle artifacts from trusted sources; never deserialize untrusted files.
+### Archived notebook results
+
+| Classifier | Spam precision | Spam recall | Spam F1 |
+| --- | ---: | ---: | ---: |
+| Multinomial Naive Bayes | 1.000 | 0.826 | 0.904 |
+| Logistic regression | 1.000 | 0.685 | 0.813 |
+| Linear SVM | 0.978 | 0.893 | 0.933 |
+
+These are the saved notebook outputs for the 1,115-message split. The notebook fits TF-IDF before splitting, so the vocabulary sees the test texts. For an independent evaluation, split raw messages first and fit text preprocessing and TF-IDF on the training set. The serialized classifier is the Naive Bayes model. Only load pickle artifacts from trusted sources; never deserialize untrusted files.
 
 [Author: Durvesh Sonawane](https://github.com/theNotorious19)
