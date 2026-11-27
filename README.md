@@ -17,15 +17,23 @@ A text classification project exploring spam detection using email data and TF-I
 ## Getting started
 Clone the repository, create a Python environment, install Jupyter and the dependencies imported in the notebook, and open main.ipynb. The package metadata does not currently declare runtime dependencies. Run the notebook to inspect training and evaluation.
 
-## Limitations
-### Archived notebook results
+## Independent evaluation
 
-| Classifier | Spam precision | Spam recall | Spam F1 |
-| --- | ---: | ---: | ---: |
-| Multinomial Naive Bayes | 1.000 | 0.826 | 0.904 |
-| Logistic regression | 1.000 | 0.685 | 0.813 |
-| Linear SVM | 0.978 | 0.893 | 0.933 |
+Deduplicated normalized messages, then made a stratified 80/20 split with seed 42. TF-IDF vocabulary and weights were fitted on the 4,124 training messages only. The test split contains 1,032 messages including 128 spam messages.
 
-These are the saved notebook outputs for the 1,115-message split. The notebook fits TF-IDF before splitting, so the vocabulary sees the test texts. For an independent evaluation, split raw messages first and fit text preprocessing and TF-IDF on the training set. The serialized classifier is the Naive Bayes model. Only load pickle artifacts from trusted sources; never deserialize untrusted files.
+| Classifier | Accuracy | Spam precision | Spam recall | Spam F1 |
+| --- | ---: | ---: | ---: | ---: |
+| Multinomial Naive Bayes | 97.38% | 100.00% | 78.91% | 0.8821 |
+| Logistic regression | 96.71% | 98.96% | 74.22% | 0.8482 |
+| Linear SVM | 98.06% | 98.21% | 85.94% | 0.9167 |
+
+Run the evaluation from the repository root with Python 3.12:
+
+```sh
+python -m pip install -r requirements.txt
+python evaluate.py
+```
+
+This run uses scikit-learn's built-in tokenization and English stop words. The archived notebook uses NLTK and fitted TF-IDF before splitting. The bundled pickle is the original Naive Bayes artifact. The table reflects models refit by the evaluation script. Only deserialize trusted pickle files.
 
 [Author: Durvesh Sonawane](https://github.com/theNotorious19)
